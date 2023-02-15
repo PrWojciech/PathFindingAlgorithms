@@ -5,7 +5,7 @@ export function getUnvisitedNeighbours (currentNode, grid) {
     if (row < grid.length - 1) neighbours.push(grid[row + 1][col])
     if (col > 0) neighbours.push(grid[row][col - 1])
     if (col < grid.length - 1) neighbours.push(grid[row][col + 1])
-    // console.log(neighbours)
+
 
     return neighbours.filter(node => !node.isVisited);
 }

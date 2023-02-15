@@ -1,1 +1,1 @@
-https://PrWojciech.github.io/PathFindingAlgorythms
+https://PrWojciech.github.io/PathFindingAlgorithms

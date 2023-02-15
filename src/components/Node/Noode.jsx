@@ -11,6 +11,7 @@ export default class Node extends Component {
             isStart,
             isWall,
             isVisited,
+            isPath,
             onMouseDown,
             onMouseUp,
             onMouseEnter,
@@ -24,6 +25,8 @@ export default class Node extends Component {
             ? 'node-wall'
             : isVisited
             ? 'node-visited'
+            : isPath
+            ? 'node-shortest-path'
             : ""
 
 

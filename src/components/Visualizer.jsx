@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import Node from "./Node/Noode";
 import './Node/Row.css'
 import dijkstra, {getShortestPath} from "../mazeSolvingAlgorythms/dijkstra";
+import createPath from "../utils/Path";
 
 import deepFirstSearch from "../mazeSolvingAlgorythms/deepFirstSearch";
 
@@ -16,12 +17,13 @@ const ROWS_COUNT = 20;
 const COLS_COUNT = 20;
 
 export default class Visualizer extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             grid: [],
             mouseIsPressed: false,
-            cancel: false
+            cancel: false,
+            currentAlgorithm: null
         }
     }
 
@@ -43,16 +45,48 @@ export default class Visualizer extends Component {
     }
 
     handleMouseUp() {
-
         this.setState({mouseIsPressed: false})
     }
 
-    animate(visitedNodesInOrder) {
+
+animatePath(path){
+
+    let i = 0;
+    const intervalId = setInterval(() => {
+        if (this.state.cancel === true) {
+            clearInterval(intervalId);
+        } else if (i === path.length) {
+            clearInterval(intervalId);
+        } else {
+            const newGrid = this.state.grid.slice();
+            const node = path[i];
+            node.isVisited = false;
+            node.isPath = true;
+            newGrid[node.row][node.col] = node;
+            this.setState({grid: newGrid});
+            i++;
+
+        }
+
+    }, INTERVAL_IN_MILISECONDS);
+
+}
+
+    animate(visitedNodesInOrder,finishNode) {
+        console.log(visitedNodesInOrder)
+
         let i = 0;
         const intervalId = setInterval(() => {
             if (this.state.cancel === true) {
-                console.log("stop");
                 clearInterval(intervalId);
+            } else if (i === visitedNodesInOrder.length) {
+                if(this.state.currentAlgorithm==="Dijkstra") {
+                    this.animatePath(createPath(finishNode))
+                    clearInterval(intervalId);
+                }else if(this.state.currentAlgorithm==="DFS"){
+                    this.animatePath(visitedNodesInOrder)
+                    clearInterval(intervalId);
+                }
             } else {
                 const newGrid = this.state.grid.slice();
                 const node = visitedNodesInOrder[i];
@@ -61,45 +95,37 @@ export default class Visualizer extends Component {
                 this.setState({grid: newGrid});
                 i++;
 
-                if (i === visitedNodesInOrder.length) {
-                    clearInterval(intervalId);
-                }
             }
 
         }, INTERVAL_IN_MILISECONDS);
     }
 
     doDijkstra() {
+
         const {grid} = this.state;
-        this.setState({cancel: false}, () => {
-            console.log(this.state.cancel)
+        this.setState({cancel: false, currentAlgorithm:"Dijkstra"}, () => {
+
             const startNode = grid[START_NODE_ROW][START_NODE_COL]
             const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL]
             const dijkstraPath = dijkstra(grid, startNode, endNode)
-            console.log(dijkstraPath)
-            this.animate(dijkstraPath)
+
+            this.animate(dijkstraPath,endNode)
         })
 
     }
 
     animateDFS() {
         const {grid} = this.state;
-        this.setState({cancel:false})
-
+        this.setState({cancel: false,currentAlgorithm:"DFS"})
         const startNode = grid[START_NODE_ROW][START_NODE_COL];
         const endNode = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         let maze = deepFirstSearch(grid, startNode, endNode);
-
-
-        this.animate(maze)
-
+        console.log(maze.length)
+        console.log(endNode)
+        this.animate(maze,endNode)
     }
 
-
-
-
     render() {
-
         const {grid, mouseIsPressed} = this.state;
         return (
             <div>
@@ -109,15 +135,15 @@ export default class Visualizer extends Component {
                 <button onClick={() => {
                     const newGrid = getEmptyGrid()
                     this.setState({cancel: true})
-                    this.setState({grid: newGrid, mouseIsPressed: false})
+                    this.setState({grid: newGrid, mouseIsPressed: false, currentAlgorithm: null})
                 }}> clear
                 </button>
                 <div className="grid">
-                    {grid.map((row, rowIndex) => {
+                    {grid.map((wholeRow, rowIndex) => {
                         return (
                             <div className="row" key={rowIndex}>
-                                {row.map((node, nodeIndex) => {
-                                    const {row, col, isFinish, isStart, isWall, isVisited} = node;
+                                {wholeRow.map((node, nodeIndex) => {
+                                    const {row, col, isFinish, isStart, isWall, isVisited, isPath} = node;
 
                                     return (
                                         <Node
@@ -127,6 +153,7 @@ export default class Visualizer extends Component {
                                             isFinish={isFinish}
                                             isStart={isStart}
                                             isWall={isWall}
+                                            isPath={isPath}
                                             isVisited={isVisited}
 
                                             mouseIsPressed={mouseIsPressed}
@@ -169,6 +196,7 @@ const createNode = (row, col) => {
         isWall: false,
         isVisited: false,
         distance: Infinity,
+        isPath: false,
         previousNode: null,
         className: "node"
     }
