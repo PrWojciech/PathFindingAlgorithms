@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-// import Noode from "./Node/Noode";
+
 import Node from "./Node/Noode";
 import './Node/Row.css'
 import dijkstra from "../mazeSolvingAlgorythms/dijkstra";
