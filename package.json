@@ -23,7 +23,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "PathFinding",
+      "react-app",
       "react-app/jest"
     ]
   },
