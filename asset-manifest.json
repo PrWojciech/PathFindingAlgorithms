@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/PathFindingAlgorythms/static/css/main.610f98df.css",
+    "main.js": "/PathFindingAlgorythms/static/js/main.b32d077b.js",
+    "static/js/787.a00309e1.chunk.js": "/PathFindingAlgorythms/static/js/787.a00309e1.chunk.js",
+    "static/media/logo.svg": "/PathFindingAlgorythms/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/PathFindingAlgorythms/index.html",
+    "main.610f98df.css.map": "/PathFindingAlgorythms/static/css/main.610f98df.css.map",
+    "main.b32d077b.js.map": "/PathFindingAlgorythms/static/js/main.b32d077b.js.map",
+    "787.a00309e1.chunk.js.map": "/PathFindingAlgorythms/static/js/787.a00309e1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.610f98df.css",
+    "static/js/main.b32d077b.js"
+  ]
+}
