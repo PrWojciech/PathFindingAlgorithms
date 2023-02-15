@@ -20,15 +20,14 @@ export default class Node extends Component {
         const additionalClassName = isFinish
             ? 'node-finish'
             : isStart
-            ? 'node-start'
-            : isWall
-            ? 'node-wall'
-            : isVisited
-            ? 'node-visited'
-            : isPath
-            ? 'node-shortest-path'
-            : ""
-
+                ? 'node-start'
+                : isWall
+                    ? 'node-wall'
+                    : isVisited
+                        ? 'node-visited'
+                        : isPath
+                            ? 'node-shortest-path'
+                            : ""
 
         return (
             <div
@@ -37,7 +36,6 @@ export default class Node extends Component {
                 onMouseDown={() => onMouseDown(row, col)}
                 onMouseEnter={() => onMouseEnter(row, col)}
                 onMouseUp={() => onMouseUp(row, col)}
-
             ></div>
 
         );

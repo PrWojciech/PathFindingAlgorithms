@@ -7,24 +7,13 @@ export default function deepFirstSearch(grid, startNode, endNode) {
     const visitedNodes = []
     let previousNode = null;
 
-    // let i =0
-    // while (i<10) {
-    //     i++
-
     while (toVisitStack.length > 0) {
-
         if (visitedNodes.length > 0) {
             previousNode = visitedNodes[visitedNodes.length - 1]
         }
         let currentNode = toVisitStack.shift()
-
         if (currentNode.isWall === true) continue
-        if (currentNode === endNode) {
-            currentNode.previousNode=previousNode
-            visitedNodes.unshift(currentNode)
-
-            return unVisitNodes(visitedNodes)
-        }
+        if (currentNode === endNode) return unVisitNodes(visitedNodes)
         currentNode.previousNode = previousNode
         currentNode.isVisited = true;
         updateToVisitStack(currentNode, grid, toVisitStack)
