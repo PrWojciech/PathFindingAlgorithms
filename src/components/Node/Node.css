@@ -4,11 +4,19 @@
     outline: 1px solid rgb(175, 216, 248);
     display: inline-block;
 }
+.row{
+    height: 25px;
+
+}
 @media only screen and (max-width: 600px) {
     /* Set the width and height of the node to 15px when the screen size is 600px or less */
     .node {
         width: 12px;
         height: 12px;
+    }
+    .row{
+        height: 12px;
+
     }
 }
 @media only screen and (min-width: 600px) and (max-width: 830px) {
@@ -16,6 +24,10 @@
     .node {
         width: 15px;
         height: 15px;
+    }
+    .row{
+        height: 15px;
+
     }
 }
 
@@ -27,6 +39,10 @@
         width: 20px;
         height: 20px;
     }
+    .row{
+        height: 20px;
+
+    }
 }
 
 @media only screen and (min-width: 1020px) {
@@ -34,6 +50,10 @@
     .node {
         width: 25px;
         height: 25px;
+    }
+    .row{
+        height: 25px;
+
     }
 }
 
