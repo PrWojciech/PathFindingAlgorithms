@@ -4,6 +4,44 @@
     outline: 1px solid rgb(175, 216, 248);
     display: inline-block;
 }
+@media only screen and (max-width: 600px) {
+    /* Set the width and height of the node to 15px when the screen size is 600px or less */
+    .node {
+        width: 12px;
+        height: 12px;
+    }
+}
+@media only screen and (min-width: 600px) and (max-width: 830px) {
+    /* Set the width and height of the node to 20px when the screen size is between 601px and 900px */
+    .node {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+@media only screen and (min-width: 830px) and (max-width: 1200px) {
+    /* Set the width and height of the node to 20px when the screen size is between 601px and 900px */
+    .node {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media only screen and (min-width: 1020px) {
+    /* Set the width and height of the node to 25px when the screen size is greater than 900px */
+    .node {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /* When the screen width is at least 1024px, set the height to 400px */
+    .my-div {
+        height: 25px;
+        width: 25px;
+    }
+}
 
 .node-finish {
     background-color: red;
@@ -15,11 +53,10 @@
 
 .node-visited {
     animation-name: visitedAnimation;
-    animation-duration: 1.5s;
-    animation-timing-function: ease-out;
-    animation-delay: 0;
-    animation-direction: alternate;
-    animation-iteration-count: 1;
+    animation-duration: 1.8s;
+    /*animation-timing-function: ease-out;*/
+    /*animation-direction: alternate;*/
+    /*animation-iteration-count: 1;*/
     animation-fill-mode: forwards;
     animation-play-state: running;
 }
@@ -27,22 +64,20 @@
 @keyframes visitedAnimation {
     0% {
         transform: scale(0.3);
-        background-color: rgba(0, 0, 66, 0.75);
+        background-color: rgba(0, 0, 60, 0.75);
         border-radius: 100%;
     }
-
     50% {
-        background-color: rgba(17, 104, 217, 0.75);
-    }
+        background-color: rgba(154, 43, 104, 0.75);
 
+    }
     75% {
         transform: scale(1.2);
-        background-color: rgba(0, 217, 159, 0.75);
+        background-color: rgba(60, 70, 150, 0.75);
     }
-
     100% {
         transform: scale(1);
-        background-color: rgba(0, 190, 218, 0.75);
+        background-color: rgba(120, 190, 230, 0.75);
     }
 }
 
@@ -54,7 +89,7 @@
     animation-name: shortestPath;
     animation-duration: 1.5s;
     animation-timing-function: ease-out;
-    animation-delay: 0;
+
     animation-direction: alternate;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
